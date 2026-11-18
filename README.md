@@ -1,6 +1,6 @@
 # SafeCrackPro
 
-Projeto de uma fechadura digital desenvolvido em SystemVerilog para a placa DE2-115. A senha é composta por quatro dígitos, que são editados e confirmados individualmente pelos botões.
+Projeto desenvolvido em SystemVerilog para a placa DE2-115, como uma evolução do SafeCrack FSM apresentado em sala de aula. O sistema permite compor uma senha de quatro dígitos, navegando entre os valores de 0 a 9 por meio dos push buttons e confirmando cada dígito individualmente. Os valores são exibidos nos displays HEX3 a HEX0, enquanto o HEX4 indica a posição atualmente em edição, permitindo ao usuário acompanhar a composição da senha antes de tentar abrir o cofre.
 
 ## Principais Bugs e Limitações
 
@@ -18,7 +18,7 @@ Pressionamento simultâneo de botões: A FSM reconhece apenas os padrões indivi
 
 ## Descrição como os requisitos foram implementados
 
-Visão geral: O módulo safecrackpro_fsm implementa uma máquina de estados finitos com três estados: EDIT, SUCCESS e ERROR. A FSM recebe o clock, o reset e os três botões de controle. Como saídas, fornece os quatro dígitos informados, a posição atualmente selecionada e os sinais de controle dos LEDs vermelhos e verdes. A senha correta é 1234 e os tempos de sinalização são de cinco segundos para acerto e três segundos para erro.
+**Visão geral**: O módulo safecrackpro_fsm implementa uma máquina de estados finitos com três estados: EDIT, SUCCESS e ERROR. A FSM recebe o clock, o reset e os três botões de controle. Como saídas, fornece os quatro dígitos informados, a posição atualmente selecionada e os sinais de controle dos LEDs vermelhos e verdes. A senha correta é 1234 e os tempos de sinalização são de cinco segundos para acerto e três segundos para erro.
 
 Os quatro dígitos e os displays: Os quatro dígitos são armazenados no sinal digits, com quatro bits para cada posição. O registrador current_position_idx indica qual dígito está sendo editado, utilizando os índices de 0 a 3. No top-level, os valores são enviados aos displays de sete segmentos, enquanto a posição selecionada pode ser apresentada no HEX4 como um número de 1 a 4. Apenas o dígito selecionado é alterado durante a edição.
 
