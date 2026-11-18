@@ -1,8 +1,8 @@
-#SafeCrackPro
+# SafeCrackPro
 
 Projeto de uma fechadura digital desenvolvido em SystemVerilog para a placa DE2-115. A senha é composta por quatro dígitos, que são editados e confirmados individualmente pelos botões.
 
-##Principais Bugs e Limitações
+## Principais Bugs e Limitações
 
 Ausência de filtro de debounce nos botões (KEY[3:1]): O código detecta a borda de pressionamento por meio de btn_edge = btn_pos & ~btn_prev, mas não implementa um filtro temporal. Na placa física, o repique mecânico (bouncing) pode fazer um único clique ser interpretado como mais de um, alterando o dígito ou avançando a posição indevidamente.
 
@@ -16,7 +16,7 @@ Sem retorno para dígitos já confirmados: Depois de confirmar uma posição, o 
 
 Pressionamento simultâneo de botões: A FSM reconhece apenas os padrões individuais de confirmação, incremento ou decremento. Se dois ou mais botões forem pressionados ao mesmo tempo, a combinação não corresponde a nenhum desses padrões e é ignorada.
 
-##Descrição como os requisitos foram implementados
+## Descrição como os requisitos foram implementados
 
 Visão geral: O módulo safecrackpro_fsm implementa uma máquina de estados finitos com três estados: EDIT, SUCCESS e ERROR. A FSM recebe o clock, o reset e os três botões de controle. Como saídas, fornece os quatro dígitos informados, a posição atualmente selecionada e os sinais de controle dos LEDs vermelhos e verdes. A senha correta é 1234 e os tempos de sinalização são de cinco segundos para acerto e três segundos para erro.
 
@@ -34,11 +34,11 @@ Verificando a senha e sinalizando o resultado: Se a sequência informada corresp
 
 Retorno ao início: Ao terminar a contagem em SUCCESS ou ERROR, a FSM retorna para EDIT, zera o temporizador e os quatro dígitos e seleciona novamente a primeira posição, permitindo uma nova tentativa.
 
-##Diagrama de estados
+## Diagrama de estados
 
 <img width="960" height="257" alt="Captura de tela de 2026-11-18 14-17-50" src="https://github.com/user-attachments/assets/46bc6eb6-ed67-458e-91af-c8587022db72" />
 
 
-##Diagrama Waveform:
+## Diagrama Waveform:
 
 <img width="1090" height="759" alt="waveform" src="https://github.com/user-attachments/assets/54c86abb-ff8e-4e46-bbc5-dd010c466378" />
