@@ -1,0 +1,6 @@
+
+State Machine - |safecrackpro_top|safecrackpro_fsm:fsm_inst|state
+Name state.EDIT state.ERROR state.SUCCESS 
+state.EDIT 0 0 0 
+state.SUCCESS 1 0 1 
+state.ERROR 1 1 0 
